@@ -33,6 +33,10 @@
                         <label for="phone">Phone</label>
                         <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Phone">
                     </div>
+                     <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" class="form-control" name="address" id="address" placeholder="Enter address">
+                    </div>
                     <div class="form-group">
                         <label for="message">Message</label>
                         <textarea name="message" class="form-control">Tell us about your project</textarea>
