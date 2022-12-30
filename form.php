@@ -40,7 +40,6 @@ if (isset($_POST['name'])) {
     $fp = fopen(date("Y") . '/' . date("m") . '/contactform/' . date('d-h-i-s') . "-form.txt", "wb");
     fwrite($fp, $content);
     fclose($fp);
-
 // create email headers
     $headers = 'From: ' . $email . "\r\n" .
         'Reply-To: ' . $email . "\r\n" .
