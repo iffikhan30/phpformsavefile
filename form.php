@@ -7,8 +7,10 @@ if (!file_exists(date("Y") . '/' . date("m"))) {
     mkdir(date("Y") . '/' . date("m"), 0777, true);
     chmod(date("Y") . '/' . date("m"), 0777);
 }
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+
 
 if (isset($_POST['name'])) {
     $fname = $_POST['name'];
