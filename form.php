@@ -10,8 +10,6 @@ if (!file_exists(date("Y") . '/' . date("m"))) {
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-
 if (isset($_POST['name'])) {
     $fname = $_POST['name'];
     $email = $_POST['email'];
