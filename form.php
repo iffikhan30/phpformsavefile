@@ -1,4 +1,3 @@
-
 <?php 
 if (!file_exists(date("Y"))) {
     mkdir(date("Y"), 0777, true);
