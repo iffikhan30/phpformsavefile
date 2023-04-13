@@ -11,34 +11,34 @@
 </head>
     
 <body>
-    
+
 <section class="form">
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <form name="contactform" id="contactform" class="AnimationForm">
+                <form name="contactform" id="contactform" class="formsavefile">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name">
+                        <input type="hidden" name="formname" value="contactform"/>
+                        <input type="text" class="form-control" id="name" name="name" value="Robet Jay" placeholder="Enter Name"/>
                     </div>
                     <div class="form-group">
                         <label for="email">Email address</label>
-                        <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-                               placeholder="Enter email">
+                        <input type="email" class="form-control" name="email" id="email" value="robetjay@gmail.com" placeholder="Enter email"/>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                             else.</small>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone</label>
-                        <input type="tel" class="form-control" name="phone" id="phone" placeholder="Enter Phone">
+                        <input type="tel" class="form-control" name="phone" id="phone" value="0569592248" placeholder="Enter Phone"/>
                     </div>
                      <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" class="form-control" name="address" id="address" placeholder="Enter address">
+                        <input type="text" class="form-control" name="address" id="address" value="Near MOE" placeholder="Enter address"/>
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea name="message" class="form-control">Tell us about your project</textarea>
+                        <textarea name="message" class="form-control" placeholder="Tell us about your project">Tell us about your project</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -80,14 +80,27 @@
                 }
             },
             submitHandler: function (form) {
-                console.log('valid form submission'); // for demo
                 $.ajax({
                     type: "POST",
                     url: "form.php",
                     data: $(form).serialize(),
-                    success: function () {
-                        $(form).html("<div id='message'></div>");
-                        $('#message').html("<h2>We’re thrilled to hear from you. One of our awesome consultants will get in touch with you soon.<br/>All the best,<br/></h2>");
+                    success: function (response) {
+                        data = JSON.parse( response );
+                        if(data.success === true){
+                            let name = data.data.name;
+                            let email = data.data.email;
+                            let phone = data.data.phone;
+                            let message = data.data.message;
+                            window.open("https://wa.me/"+phone+"?text="+"Name : "+name+"%0a"+"Email : "+email+"%0a"+"Phone : "+phone+"%0a"+"Message : "+message,"_blank").focus();
+                            $('.formsavefile').append("<h4 class='savefile-message'>We’re thrilled to hear from you. One of our awesome consultants will get in touch with you soon.<br/>All the best,<br/></h4>");
+                            $('.savefile-message').fadeOut("slow");
+                        }else if(data.success === false){
+                            $('.formsavefile').append("<h4 class='savefile-message'>Semothing Went Wrong</h4>");
+                            $('.savefile-message').fadeOut("slow");
+                        }else{
+                            $('.formsavefile').append("<h4 class='savefile-message'>!Issue</h4>");
+                            $('.savefile-message').fadeOut("slow");
+                        }
                     }
                 });
                 return false; // required to block normal submit since you used ajax
