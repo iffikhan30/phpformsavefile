@@ -1,11 +1,9 @@
 <?php 
-
 //Create Year Directory
 if (!file_exists(date("Y"))) {
     mkdir(date("Y"), 0777, true);
     chmod(date("Y"), 0777);
 }
-
 //Create Month Directory
 if (!file_exists(date("Y") . '/' . date("m"))) {
     mkdir(date("Y") . '/' . date("m"), 0777, true);
